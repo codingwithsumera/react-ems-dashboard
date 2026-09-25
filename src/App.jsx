@@ -1,7 +1,13 @@
-import React from "react";
+import Login from "./components/Auth/login.jsx";
 
-const App = () => {
-  return <div>App</div>;
-};
+function App() {
+  return (
+    <div>
+      <h1>Employee Management System</h1>
+
+      <Login />
+    </div>
+  );
+}
 
 export default App;
