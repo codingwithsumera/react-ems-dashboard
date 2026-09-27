@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { getTasks, saveTasks } from "../utilities/localStorage.jsx";
 
 const TaskContext = createContext(null);
@@ -24,7 +24,7 @@ export function TaskProvider({ children }) {
 
   const updateTaskStatus = (taskId, status) => {
     setTasks((current) =>
-      current.map((task) => (task.id === taskId ? { ...task, status } : task))
+      current.map((task) => (task.id === taskId ? { ...task, status, updatedAt: new Date().toISOString() } : task))
     );
   };
 
@@ -32,11 +32,14 @@ export function TaskProvider({ children }) {
     setTasks((current) => current.filter((task) => task.id !== taskId));
   };
 
-  return (
-    <TaskContext.Provider value={{ tasks, addTask, updateTaskStatus, deleteTask }}>
-      {children}
-    </TaskContext.Provider>
+  const resetDemoData = () => setTasks(getTasks());
+
+  const value = useMemo(
+    () => ({ tasks, addTask, updateTaskStatus, deleteTask, resetDemoData }),
+    [tasks]
   );
+
+  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
 }
 
 export const useTasks = () => useContext(TaskContext);
