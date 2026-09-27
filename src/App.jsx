@@ -1,11 +1,14 @@
-import Login from "./components/Auth/login.jsx";
+import Login from "./components/Auth/Login";
 
 function App() {
   return (
     <div>
       <h1>Employee Management System</h1>
 
-      <Login />
+      <Login
+        title="Employee Login"
+        message="Please enter your credentials to continue"
+      />
     </div>
   );
 }
