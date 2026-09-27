@@ -123,3 +123,22 @@
   .form-row { grid-template-columns: 1fr; }
   .task-row, .employee-task { flex-direction: column; }
 }
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.toolbar .search-input { flex: 1; }
+.toolbar select {
+  min-width: 150px;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #172033;
+  background: #fff;
+}
+@media (max-width: 600px) {
+  .toolbar { flex-direction: column; }
+  .toolbar select { width: 100%; }
+}
